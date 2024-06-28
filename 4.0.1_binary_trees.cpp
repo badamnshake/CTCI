@@ -22,8 +22,6 @@ public:
     }
 };
 
-vector<int> v = {5, 2, 3, 7, 6, 1, 4, 0};
-
 bool search(Node *root, int target);
 Node *remove(Node *root, int target);
 
@@ -38,13 +36,27 @@ void postorder(Node *root);
 void bfs(Node *root);
 void bfsx(Node *root);
 
+bool findPath(Node *root, vector<int> &path);
+
+vector<int> v = {5, 2, 3, 7, 6, 1, 4, 0};
+
 int main()
 {
-    Node *root = nullptr;
-    for (auto x : v)
-    {
-        root = insert(root, x);
-    }
+    Node *root = new Node(4);
+    Node *temp = root;
+    root->left = new Node(1);
+    root->right = new Node(1);
+    temp = root->left;
+    temp->left = new Node(0);
+    temp->right = new Node(0);
+    temp = root->right;
+    temp->left = new Node(0);
+    temp->right = new Node(2);
+    // Node *root = nullptr;
+    // for (auto x : v)
+    // {
+    //     root = insert(root, x);
+    // }
     // inorder(root);
     // cout << endl;
     // preorder(root);
@@ -54,9 +66,15 @@ int main()
     cout << endl;
     // bfs(root);
 
+    vector<int> path;
+    bool isfound = findPath(root, path);
+    for(auto x: path)
+    {
+        cout << x << " - ";
+    }
 
-    bfsx(root);
-
+    if (isfound)
+        cout << "found" << endl;
     cout << endl;
 }
 
@@ -215,4 +233,26 @@ void bfsx(Node *root)
         }
         cout << endl;
     }
+}
+
+bool findPath(Node *root, vector<int> &path)
+{
+
+    if (root == nullptr || root->data == 0)
+        return false;
+
+    path.push_back(root->data);
+
+    if (root->left == nullptr && root->right == nullptr)
+        return true;
+
+    if (findPath(root->left, path))
+        return true;
+
+    if (findPath(root->right, path))
+        return true;
+
+    path.pop_back();
+
+    return false;
 }

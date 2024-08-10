@@ -5,6 +5,7 @@
         "iostream": "cpp",
         "limits": "cpp",
         "list": "cpp",
-        "xmemory": "cpp"
+        "xmemory": "cpp",
+        "utility": "cpp"
     }
 }

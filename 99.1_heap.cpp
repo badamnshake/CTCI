@@ -41,8 +41,7 @@ public:
             {
                 int tmp = heap[i];
                 heap[i] = heap[2 * i + 1];
-                heap[2 * i + 1] = temp;
-
+                heap[2 * i + 1] = tmp;
             }
 
         }

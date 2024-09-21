@@ -1,2 +1,4 @@
 72 edit distance
 increasing triplet subsequence
+LC 84
+LC 85

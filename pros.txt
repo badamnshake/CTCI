@@ -1,0 +1,96 @@
+Merge Intervals
+
+    vector<vector<int>> merge(vector<vector<int>>& intervals) {
+
+        vector<vector<int>> result;
+        int i = 0;
+        int n = intervals.size();
+        sort(intervals.begin(), intervals.end());
+        int l;
+        int r;
+
+        while(i < n)
+        {
+            l = intervals[i][0];
+            r = intervals[i][1];
+            while( i + 1 < n && r >= intervals[i + 1][0])
+            {
+                r =  max(r, intervals[i + 1][1]);
+                i++;
+            }
+            i++;
+            result.push_back({l, r});
+        }
+        return result;
+
+        
+    }
+
+
+
+92. Reverse Linked List II
+
+
+    ListNode* reverseBetween(ListNode* head, int left, int right) {
+        if(left == right) return head;
+
+        ListNode* L;
+        ListNode* temp = nullptr;
+
+        L = head;
+
+        int i = 1;
+
+        while(i < left)
+        {
+            temp = L;
+            L = L->next;
+            i++;
+        }
+
+        
+        ListNode* prv = nullptr;
+        ListNode* cur = L;
+        ListNode* nxt = cur->next;
+    
+
+        while(cur != nullptr && i <= right)
+        {
+            nxt = cur->next;
+            cur->next = prv;
+            prv = cur;
+            cur = nxt;
+            i++;
+        }
+
+        L->next = cur;
+        if(temp == nullptr) return prv;
+        temp->next = prv;
+
+        return head;
+    }
+
+
+78 subsets
+
+
+    vector<vector<int>> subsets(vector<int>& nums) {
+        vector<vector<int>> subs;
+
+        subs.push_back({});
+        vector<int> temp;
+        int sz;
+
+        for(auto n: nums)
+        {
+            sz = subs.size();
+            for(int i = 0; i < sz; i++)
+            {
+                temp = subs[i];
+                temp.push_back(n);
+                subs.push_back(temp);
+            }
+        }
+        return subs;
+        
+    }
